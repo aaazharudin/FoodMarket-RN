@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import {Button, Gap, Header, TextInput} from '../../components';
 import {useForm} from '../../utils';
+import Axios from 'axios';
 
 const SignIn = ({navigation}) => {
   // menggunakan local state
@@ -11,11 +12,18 @@ const SignIn = ({navigation}) => {
   //menggunakan custom HOOk
   const [form, setForm] = useForm({
     email: '',
-    Password: '',
+    password: '',
   });
 
   const onSubmit = () => {
     console.log('form: ', form);
+    Axios.post('http://foodmarket-backend.buildwithangga.id/api/login', form)
+      .then(res => {
+        console.log('succes', res);
+      })
+      .catch(err => {
+        console.log('error', err);
+      });
   };
 
   return (
@@ -33,7 +41,7 @@ const SignIn = ({navigation}) => {
           label="Password"
           placeholder="Type Your Password"
           value={form.Password}
-          onChangeText={value => setForm('Password', value)}
+          onChangeText={value => setForm('password', value)}
           secureTextEntry
         />
         <Gap height={24} />
