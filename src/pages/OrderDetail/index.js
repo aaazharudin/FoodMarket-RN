@@ -21,12 +21,12 @@ const OrderDetail = ({navigation}) => {
           items={666}
         />
         <Text> Detail Transaksi </Text>
-        <ItemsValue label="Bayam Cabut" value="Idr.25.000.000" />
-        <ItemsValue label="Driver" value="Idr. 50.000" />
-        <ItemsValue label="Tax 10%" value="Idr. 25.000" valueColor="red" />
+        <ItemsValue label="Bayam Cabut" value="Idr.25.000" />
+        <ItemsValue label="Driver" value="Idr. 3.000" />
+        <ItemsValue label="Tax 10%" value="Idr. 500" valueColor="red" />
         <ItemsValue
           label="Total Price"
-          value="Idr. 25.075.000"
+          value="Idr. 28.500"
           valueColor="#1ABC9C"
         />
       </View>

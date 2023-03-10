@@ -21,7 +21,7 @@ const FoodDetail = ({navigation}) => {
         <View style={styles.mainContent}>
           <View style={styles.productContainer}>
             <View>
-              <Text style={styles.title}>Kangkung cap kingkong</Text>
+              <Text style={styles.title}>Kangkung</Text>
               <Rating />
             </View>
             <Counter />
@@ -42,7 +42,7 @@ const FoodDetail = ({navigation}) => {
         <View style={styles.footer}>
           <View style={styles.priceContainer}>
             <Text style={styles.labelTotal}>Total Price</Text>
-            <Text style={styles.priceTotal}>Idr 12.000.000</Text>
+            <Text style={styles.priceTotal}>Idr 4.000</Text>
           </View>
           <View style={styles.button}>
             <Button
