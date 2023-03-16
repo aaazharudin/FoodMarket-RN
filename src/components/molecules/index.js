@@ -12,6 +12,7 @@ import OrderTabSection from './OrderTabSection';
 import ProfileTabSection from './ProfileTabSection';
 import ItemListMenu from './ItemListMenu';
 import SearchScreen from './SearchScreen';
+import Loading from './Loading';
 
 export {
   Header,
@@ -28,4 +29,5 @@ export {
   ProfileTabSection,
   ItemListMenu,
   SearchScreen,
+  Loading,
 };
