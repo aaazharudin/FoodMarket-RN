@@ -4,8 +4,7 @@ import {StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Gap, Header, Select, TextInput} from '../../components';
-import {useForm} from '../../utils';
-import {showMessage, hideMessage} from 'react-native-flash-message';
+import {useForm, showMessage} from '../../utils';
 
 const SignUpAddress = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -15,7 +14,7 @@ const SignUpAddress = ({navigation}) => {
     city: 'Yogyakarta',
   });
   const dispatch = useDispatch();
-  const registerReducer = useSelector(state => state.registerReducer);
+  const {registerReducer, photoReducer} = useSelector(state => state);
 
   const onSubmit = () => {
     console.log('form: ', form);
@@ -29,23 +28,36 @@ const SignUpAddress = ({navigation}) => {
       .post('http://foodmarket-backend.buildwithangga.id/api/register', data)
       .then(res => {
         console.log('data success: ', res.data);
+        if (photoReducer.isUploadPhoto) {
+          const photoForUpload = new FormData();
+          photoForUpload.append('file', photoReducer);
+          axios
+            .post(
+              'http://foodmarket-backend.buildwithangga.id/api/user/photo',
+              photoForUpload, // Replace dataPhoto with photoForUpload
+              {
+                headers: {
+                  Authorization: `${res.data.data.token_type} ${res.data.data.access_token}`,
+                  'Content-Type': 'multipart/form-data',
+                },
+              },
+            )
+            .then(resUpload => {
+              console.log('success upload: ', resUpload);
+            })
+            .catch(err => {
+              console.log('error: ', err);
+            });
+        }
         dispatch({type: 'SET_LOADING', value: false});
-        showMessage('Register Success');
+        showMessage('Register Success', 'success');
         navigation.replace('SuccessSignUp');
       })
       .catch(err => {
         //console.log('sign up error: ', err.response.data.message);
         dispatch({type: 'SET_LOADING', value: false});
-        showToast(err?.response?.data?.message);
+        showMessage(err?.response?.data?.message);
       });
-  };
-
-  const showToast = (message, type) => {
-    showMessage({
-      message,
-      type: type === 'success' ? 'success' : 'danger',
-      backgroundColor: type === 'success' ? '#1ABC9C' : '#D9435E',
-    });
   };
 
   return (
