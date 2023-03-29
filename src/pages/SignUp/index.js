@@ -26,9 +26,9 @@ const SignUp = ({navigation}) => {
       {quality: 0.5, maxWidth: 200, maxHeight: 200},
       response => {
         console.log('Response = ', response);
-        showMessage('Anda tidak memeilih photo');
+
         if (response.didCancel || response.error) {
-          console.log('Anda tidak memilih photo');
+          showMessage('Anda tidak memeilih photo');
         } else {
           // Do something with the selected image
           const source = {uri: response.uri};
